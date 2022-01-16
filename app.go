@@ -3,8 +3,8 @@ package main
 import (
 	"course_management/config"
 	"course_management/db"
+	"course_management/gin_setting"
 	"course_management/logger"
-	"github.com/gin-gonic/gin"
 )
 
 func setup() {
@@ -12,10 +12,10 @@ func setup() {
 	logger.Setup()
 	db.Setup()
 
-	logger.Debug.Println("test something log")
+	gin_setting.GinSetup()
+	logger.Debug.Println("setup was done !")
 }
 
 func main() {
 	setup()
 }
-
