@@ -10,7 +10,17 @@ import (
 func SignUp(r *request.SignupTutorRequest) (int, error) {
 	tutor := models.Tutor{
 		Name:     r.Name,
-		Username: r.Username,
+		Email:    r.Email,
+		Password: bcrypt.HashPassword(r.Password),
+	}
+
+	err := new(repo.TutorRepo).Create(&tutor)
+	if err != nil {
+		return -1, err
+	}
+
+	return tutor.ID, nil
+}
 		Email:    r.Email,
 		Password: bcrypt.HashPassword(r.Password),
 	}
