@@ -24,7 +24,7 @@ func GinSetup() {
 
 func setupValidators() {
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
-		v.RegisterValidation("existed", validators.Existed)
+		v.RegisterValidation("emailExist", validators.EmailExist)
 	}
 }
 
