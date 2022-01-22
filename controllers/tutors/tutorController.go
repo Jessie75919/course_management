@@ -12,25 +12,22 @@ type TutorController struct{}
 
 func (tc *TutorController) SignUp(c *gin.Context) {
 	var data request.SignupTutorRequest
-
 	err := c.BindJSON(&data)
+
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.Abort()
 		return
 	}
 
 	id, err := service.SignUp(&data)
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"message": "sign up failed, try again",
-		})
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "sign up failed, try again"})
+		c.Abort()
+		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Sign up successfully. id: " + strconv.Itoa(id),
-	})
+	c.JSON(http.StatusOK, gin.H{"message": "Sign up successfully. id: " + strconv.Itoa(id)})
 }
 
