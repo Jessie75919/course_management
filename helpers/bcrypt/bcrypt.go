@@ -13,6 +13,6 @@ func HashPassword(pw string) string {
 	return string(hashedPW)
 }
 
-func ComparePW(unhashedPW []byte, hashedPW []byte) error {
-	return bcrypt.CompareHashAndPassword(hashedPW, unhashedPW)
+func ComparePW(unhashedPW string, hashedPW string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hashedPW), []byte(unhashedPW))
 }
