@@ -31,3 +31,23 @@ func (tc *TutorController) SignUp(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Sign up successfully. id: " + strconv.Itoa(id)})
 }
 
+func (tc *TutorController) Login(c *gin.Context) {
+	var data request.LoginTutorRequest
+	err := c.BindJSON(&data)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.Abort()
+		return
+	}
+
+	err = service.Login(&data)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Login in failed, try again"})
+		c.Abort()
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Login successfully. email: " + data.Email})
+}

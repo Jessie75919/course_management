@@ -21,14 +21,14 @@ func SignUp(r *request.SignupTutorRequest) (int, error) {
 
 	return tutor.ID, nil
 }
-		Email:    r.Email,
-		Password: bcrypt.HashPassword(r.Password),
-	}
 
-	err := new(repo.TutorRepo).Create(&tutor)
+func Login(r *request.LoginTutorRequest) error {
+	tutor := models.Tutor{}
+	tutor, err := new(repo.TutorRepo).GetTutorByEmail(r.Email)
+
 	if err != nil {
-		return -1, err
+		return err
 	}
 
-	return tutor.ID, nil
+	return bcrypt.ComparePW(r.Password, tutor.Password)
 }
