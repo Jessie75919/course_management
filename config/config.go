@@ -7,7 +7,7 @@ import (
 )
 
 type envConfig struct {
-	DBUrl string
+	DB_URL           string
 	DEBUG bool
 }
 
@@ -15,7 +15,7 @@ var EnvConfig envConfig
 
 func Setup() {
 	EnvConfig = envConfig{
-		DBUrl: os.Getenv("DB_URL"),
+		DB_URL:           os.Getenv("DB_URL"),
 		DEBUG: parseDebug(),
 	}
 }

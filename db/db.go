@@ -12,7 +12,7 @@ var (
 )
 
 func Setup() {
-	dsn := config.EnvConfig.DBUrl
+	dsn := config.EnvConfig.DB_URL
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
